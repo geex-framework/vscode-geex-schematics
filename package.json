@@ -249,14 +249,6 @@
                         "media": {
                             "markdown": "walkthroughs/advanced.md"
                         }
-                    },
-                    {
-                        "id": "schematicspro",
-                        "title": "Become a Pro",
-                        "description": "Get the Schematics Pro experience.\n[Learn more](https://www.schematicspro.dev)",
-                        "media": {
-                            "markdown": "walkthroughs/schematicspro.md"
-                        }
                     }
                 ]
             }
@@ -274,7 +266,7 @@
         "release:patch": "npm run vscode:prepublish && vsce publish patch && git push && npm run openvsix",
         "release:minor": "npm run vscode:prepublish && vsce publish minor && git push && npm run openvsix",
         "release:major": "npm run vscode:prepublish && vsce publish major && git push && npm run openvsix",
-        "openvsix": "ovsx publish geex-schematics-$npm_package_version.vsix -p $OPENVSIX_TOKEN"
+        "publish": "vsce publish -p lulus"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",
@@ -288,7 +280,6 @@
         "glob": "8.0.1",
         "minimist": "1.2.6",
         "mocha": "9.2.2",
-        "ovsx": "0.3.0",
         "ts-loader": "9.2.8",
         "typescript": "4.6.3",
         "vsce": "2.7.0",

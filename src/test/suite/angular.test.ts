@@ -20,10 +20,10 @@ describe('Angular config', () => {
             const config = angularConfig['validateConfig']({
                 version: 1
             });
-            angularConfig['initDefaultCollections'](config);
+            angularConfig['initSchematicCollections'](config);
 
             assert.strictEqual(angularCollectionName, angularConfig.defaultUserCollection);
-            assert.deepEqual([angularCollectionName], angularConfig.defaultCollections);
+            assert.deepEqual([angularCollectionName], angularConfig.schematicCollections);
 
         });
 
@@ -35,10 +35,10 @@ describe('Angular config', () => {
                     defaultCollection: ionicCollection
                 }
             });
-            angularConfig['initDefaultCollections'](config);
+            angularConfig['initSchematicCollections'](config);
 
             assert.strictEqual(ionicCollection, angularConfig.defaultUserCollection);
-            assert.deepEqual([ionicCollection, angularCollectionName], angularConfig.defaultCollections);
+            assert.deepEqual([ionicCollection, angularCollectionName], angularConfig.schematicCollections);
 
         });
 

@@ -29,7 +29,7 @@ describe('Workspace folder config', () => {
         it('Angular default collections', () => {
 
             assert.strictEqual(angularCollectionName, workspaceFolder.getDefaultUserCollection());
-            assert.deepStrictEqual([angularCollectionName], workspaceFolder.getDefaultCollections());
+            assert.deepStrictEqual([angularCollectionName], workspaceFolder.getSchematicCollections());
 
         });
 
@@ -114,7 +114,7 @@ describe('Workspace folder config', () => {
         it('Angular default collections', () => {
 
             assert.strictEqual(ionicCollectionName, workspaceFolder.getDefaultUserCollection());
-            assert.deepStrictEqual([ionicCollectionName, angularCollectionName], workspaceFolder.getDefaultCollections());
+            assert.deepStrictEqual([ionicCollectionName, angularCollectionName], workspaceFolder.getSchematicCollections());
 
         });
 

@@ -32,8 +32,7 @@ To separate component types is good for:
 
 ## Getting started
 
-Follow instructions on [Visual Studio Code marketplace](https://marketplace.visualstudio.com/items?itemName=lulus.geex-schematics),
-or just search for "Geex Angular Schematics" by "Cyrille Tuzi" directly inside VS Code Extensions view.
+Follow instructions on [Visual Studio Code marketplace](https://marketplace.visualstudio.com/items?itemName=lulus.geex-schematics)
 
 ## Documentation
 
@@ -55,19 +54,6 @@ in the *VS Code* Terminal, the extension should work.
 **If the Angular CLI is not working in the *VS Code* Terminal, please correct that first *before* opening a GitHub issue.**
 
 The walkthrough includes a full [troubleshooting guide](https://github.com/geex-graphql/vscode-geex-schematics/blob/main/walkthroughs/troubleshooting.md) to help you, be sure to read it in case of problem.
-
-## Become a Pro!
-
-The Geex Angular Schematics extension for Visual Studio Code started as a tool to help my trainees during the Angular courses I teach. It is now **used by 600 000 developers**.
-
-While still having a ton of automation ideas to increase productivity, good practices, optimization and architecture in Angular (and Ionic) projects, I have reached the limit of work I can do voluntarily (we are talking of *months* of full time *unpaid* work).
-
-So instead of throwing in the bin all my ideas that could greatly enhance the every day developer experience of so many people, I decided to release new features in **[Schematics Pro](https://www.schematicspro.dev)**, which contains:
-- more advanced features for Angular
-- schematics for other frameworks too: React, Vue, Ionic, Svelte, Stencil, Lit and more
-- easy and fast custom schematics creation
-
-**[Learn more about Schematics Pro](https://www.schematicspro.dev)**
 
 ## Release Notes
 

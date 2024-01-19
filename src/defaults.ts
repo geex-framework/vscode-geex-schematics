@@ -1,7 +1,7 @@
 /**
  * Default third-party schematics collections.
  */
-export const defaultCollectionsNames: string[] = [
+export const schematicCollectionsNames: string[] = [
     '@angular/material',
     '@angular/cdk',
     '@ionic/angular-toolkit',

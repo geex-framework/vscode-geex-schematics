@@ -29,6 +29,7 @@ export interface AngularJsonSchema {
          * For example, it is set to `@ionic/angular-toolkit` in Ionic projects.
          */
         defaultCollection?: string | undefined;
+        schematicCollections?:string[];
     };
     /** Default values for schematics options */
     schematics: AngularJsonSchematicsSchema;

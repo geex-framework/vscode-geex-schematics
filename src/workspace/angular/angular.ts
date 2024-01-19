@@ -14,7 +14,7 @@ export class AngularConfig {
     /** User default collection, otherwise official Angular CLI default collection */
     defaultUserCollection = angularCollectionName;
     /** User + official default collections */
-    defaultCollections: string[] = [];
+    schematicCollections: string[] = [];
     /** Root project name */
     rootProjectName = '';
 
@@ -29,7 +29,7 @@ export class AngularConfig {
 
         const config = this.validateConfig(unsafeConfig);
 
-        this.initDefaultCollections(config);
+        this.initSchematicCollections(config);
 
         Output.logInfo(`Default schematics collection detected in your Angular config: ${this.defaultUserCollection}`);
 
@@ -111,7 +111,8 @@ export class AngularConfig {
         return {
             version,
             cli: {
-                defaultCollection: JsonValidator.string(JsonValidator.object(config['cli'])?.['defaultCollection']),
+              defaultCollection: JsonValidator.string(JsonValidator.object(config['cli'])?.['defaultCollection']),
+              schematicCollections: JsonValidator.array(JsonValidator.object(config['cli'])?.['schematicCollections']) as string[],
             },
             schematics: this.validateConfigSchematics(config['schematics']),
             projects,
@@ -134,13 +135,13 @@ export class AngularConfig {
     /**
      * Initialize default collections
      */
-    private initDefaultCollections(config: Pick<AngularJsonSchema, 'cli'>): void {
+    private initSchematicCollections(config: Pick<AngularJsonSchema, 'cli'>): void {
 
         /* Take `defaultCollection` defined in `angular.json`, or defaults to official collection */
         this.defaultUserCollection = config.cli?.defaultCollection ?? angularCollectionName;
 
         /* `Set` removes duplicates */
-        this.defaultCollections = Array.from(new Set([this.defaultUserCollection, angularCollectionName]));
+      this.schematicCollections = Array.from(new Set([...(config.cli?.schematicCollections ?? []), angularCollectionName]));
 
     }
 

@@ -81,7 +81,7 @@ export class WorkspaceFolderConfig implements vscode.WorkspaceFolder {
             uri: this.uri,
             name: this.name,
             index: this.index,
-        }, this.getDefaultCollections());
+        }, this.getSchematicCollections());
         this.collections = collections;
 
         const componentShortcut = new ComponentShortcut();
@@ -143,9 +143,9 @@ export class WorkspaceFolderConfig implements vscode.WorkspaceFolder {
     /**
      * Get default collections (user one + official one).
      */
-    getDefaultCollections(): string[] {
+    getSchematicCollections(): string[] {
 
-        return this.angularConfig?.defaultCollections ?? [];
+        return this.angularConfig?.schematicCollections ?? [];
 
     }
 

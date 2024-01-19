@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-import { defaultCollectionsNames, angularCollectionName } from '../../defaults';
+import { schematicCollectionsNames, angularCollectionName } from '../../defaults';
 import { Output, JsonValidator } from '../../utils';
 
 import { Collection } from './collection';
@@ -18,9 +18,9 @@ export class Collections {
      * **Must** be called after each `new Collections()`
      * (delegated because `async` is not possible on a constructor).
      */
-    async init(workspaceFolder: vscode.WorkspaceFolder, userDefaultCollections: string[]): Promise<vscode.FileSystemWatcher[]> {
+    async init(workspaceFolder: vscode.WorkspaceFolder, userSchematicCollections: string[]): Promise<vscode.FileSystemWatcher[]> {
 
-        return await this.setList(workspaceFolder, userDefaultCollections);
+        return await this.setList(workspaceFolder, userSchematicCollections);
 
     }
 
@@ -44,7 +44,7 @@ export class Collections {
     /**
      * Set collections names and preload official collections.
      */
-    private async setList(workspaceFolder: vscode.WorkspaceFolder, userDefaultCollections: string[]): Promise<vscode.FileSystemWatcher[]> {
+    private async setList(workspaceFolder: vscode.WorkspaceFolder, userSchematicCollections: string[]): Promise<vscode.FileSystemWatcher[]> {
 
         Output.logInfo(`Loading the list of schematics collections.`);
 
@@ -62,7 +62,7 @@ export class Collections {
 
         /* `Set` removes duplicate.
          * Default collections are set first as they are the most used */
-        const collectionsNames = Array.from(new Set([...userDefaultCollections, ...defaultCollectionsNames, ...userCollectionsNames]));
+        const collectionsNames = Array.from(new Set([...userSchematicCollections, ...schematicCollectionsNames, ...userCollectionsNames]));
 
         const existingCollections: { name: string; uri: vscode.Uri; }[] = [];
 
@@ -71,7 +71,7 @@ export class Collections {
         for (const name of collectionsNames) {
 
             /* Be silent on extension defaults, be not on user defined collections */
-            const silent = (userDefaultCollections.includes(name) || userCollectionsNames.includes(name)) ? false : true;
+            const silent = (userSchematicCollections.includes(name) || userCollectionsNames.includes(name)) ? false : true;
 
             const uri = await findCollectionUri(workspaceFolder, name, { silent });
 
