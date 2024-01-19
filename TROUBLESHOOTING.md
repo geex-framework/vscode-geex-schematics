@@ -1,4 +1,4 @@
-# Angular Schematics - Troubleshooting
+# Geex Angular Schematics - Troubleshooting
 
 Here is a list of common issues.
 
@@ -18,7 +18,7 @@ The first time you open a new folder in VS Code, you are asked if you trust the 
 
 <br>
 
-## I do not see Angular schematics
+## I do not see Geex Angular Schematics
 
 This extension will only display the schematics and options relevant to your project. It does so by detecting the dependencies (for example `@angular/core`) in `package.json`. It will look into:
 - `package.json` at the root of the opened folder
@@ -40,12 +40,12 @@ So you should consider disabling the `Compact Folders` VS Code *workspace* setti
 
 ## Extension logs
 
-The extension is logging some debug information. You can see the logs: from the VS Code menu > View > Output > select "Angular Schematics - Logs" from the dropdown.
+The extension is logging some debug information. You can see the logs: from the VS Code menu > View > Output > select "Geex Angular Schematics - Logs" from the dropdown.
 
 <br>
 
 ## Support
 
-If it still does not work, you can ask a question on [GitHub discussions](https://github.com/cyrilletuzi/vscode-angular-schematics/discussions).
+If it still does not work, you can ask a question on [GitHub discussions](https://github.com/geex-graphql/vscode-geex-schematics/discussions).
 
 <br>

@@ -1,0 +1,10 @@
+{
+  "name": "test-workspaces",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@angular/cli": "13.3.2",
+    "@schematics/angular": "13.3.2"
+  }
+}

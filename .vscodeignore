@@ -1,0 +1,21 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+src/**
+.gitignore
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/.eslintrc.json
+**/*.map
+**/*.ts
+
+# Because of webpack bundling
+node_modules
+out/
+src/
+webpack.config.js
+
+# Custom
+geex-schematics-demo-20191025.gif
+docs/**
+test-workspaces/**
