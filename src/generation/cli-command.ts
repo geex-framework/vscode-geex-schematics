@@ -22,7 +22,7 @@ export class CliCommand {
         relativeToWorkspaceFolder: '',
         relativeToProjectFolder: '',
     };
-    private baseCommand = 'ng g';
+    private baseCommand = 'npx ng g';
     private projectName = '';
     private collectionName = angularCollectionName;
     private schematicName = '';

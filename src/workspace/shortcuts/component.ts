@@ -107,7 +107,7 @@ export class ComponentShortcut {
         }
 
         /* User custom types */
-        let userTypes = vscode.workspace.getConfiguration('ngschematics', workspaceFolder.uri).get<unknown>('componentTypes', []);
+        let userTypes = vscode.workspace.getConfiguration('geex_schematics', workspaceFolder.uri).get<unknown>('componentTypes', []);
 
         if (userTypes === '') {
             userTypes = [];
@@ -116,7 +116,7 @@ export class ComponentShortcut {
         /* Info about configuration change in version >= 4 of the extension */
         if (!Array.isArray(userTypes)) {
 
-            Output.logWarning(`"ngschematics.componentTypes" option has changed in version >= 4. See the changelog to update it.`);
+            Output.logWarning(`"geex_schematics.componentTypes" option has changed in version >= 4. See the changelog to update it.`);
 
             userTypes = [];
 
@@ -149,7 +149,7 @@ export class ComponentShortcut {
     }
 
         /**
-     * Validate "ngschematics.componentTypes" user preference
+     * Validate "geex_schematics.componentTypes" user preference
      */
     private validateUserComponentType(userPreference: unknown): ComponentType | undefined {
 

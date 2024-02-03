@@ -63,7 +63,7 @@ export class SchematicsTreeDataProvider extends SchematicsTreeDataProviderEmpty 
 
                     item.command = {
                         title: `Generate ${schematicName}`,
-                        command: 'ngschematics.generate',
+                        command: 'geex_schematics.generateFrontendSchematics',
                         arguments: [undefined, { collectionName: collection.getName(), schematicName }]
                     };
                     item.iconPath = this.iconPath;

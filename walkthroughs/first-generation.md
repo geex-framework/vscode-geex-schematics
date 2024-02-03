@@ -17,7 +17,7 @@ This extension makes it quick and easy. **Just right-click on the folder you wan
 1. [Go to the Explorer view](command:workbench.view.explorer)
 2. If it is a new empty Angular project, create a random folder in `src/app`
 3. Right-click on the destination folder
-4. Click on "Angular: Generate a service"
+4. Click on "Geex: Generate a service"
 5. Just type a name: the path is already prefilled
 6. Confirm
 

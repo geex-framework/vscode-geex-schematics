@@ -269,7 +269,7 @@ For example, in your VS Code preferences
 
 ```json
 {
-  "ngschematics.componentTypes": [{
+  "geex_schematics.componentTypes": [{
     "label": "Angular Element",
     "options": [["viewEncapsulation", "ShadowDom"], ["export", "true"]],
     "detail": "Optional human description",
@@ -277,7 +277,7 @@ For example, in your VS Code preferences
 }
 ```
 
-**Breaking change**: it means the previous `ngschematics.componentTypes`
+**Breaking change**: it means the previous `geex_schematics.componentTypes`
 setting's format is not supported anymore.
 
 #### Library specific component types
@@ -305,7 +305,7 @@ Fortunately, with customizable component types explained above, you can still ad
 
 ```json
 {
-  "ngschematics.componentTypes": [{
+  "geex_schematics.componentTypes": [{
     "label": "Entry component",
     "options": [["entryComponent", "true"], ["skipSelector", "true"]],
     "detail": "Component instanciated at runtime, like a dialog or modal",
@@ -649,7 +649,7 @@ If you use on an older version of VS Code and run into issues, you can still ins
 ### Feature
 
 - Local schematics are now supported, by adding a *relative* path in VS Code preferences
-(e.g.: `"ngschematics.schematics": ["./schematics/collection.json"]`)
+(e.g.: `"geex_schematics.schematics": ["./schematics/collection.json"]`)
 
 ## [1.11.4] - 2019-01-12
 
@@ -775,7 +775,7 @@ provided that your VS Code settings are configured accordingly
 ## [0.3.0] - 2018-06-17
 
 ### Feature
-- Support all other schematics via `ngschematics.schematics` setting.
+- Support all other schematics via `geex_schematics.schematics` setting.
 
 ## [0.1.0] - 2018-06-16
 

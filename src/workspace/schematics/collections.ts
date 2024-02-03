@@ -53,7 +53,7 @@ export class Collections {
         const watchers = [];
 
         /* Configuration key is configured in `package.json` */
-        const userPreference = vscode.workspace.getConfiguration('ngschematics', workspaceFolder.uri).get<string[]>(`schematics`, []);
+        const userPreference = vscode.workspace.getConfiguration('geex_schematics', workspaceFolder.uri).get<string[]>(`schematics`, []);
 
         /* Validate user input */
         const userCollectionsNames = JsonValidator.array(userPreference, 'string') ?? [];

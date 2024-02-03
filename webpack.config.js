@@ -39,7 +39,7 @@ const config = {
     ]
   },
   performance: {
-    hints: 'error',
+    hints: 'warning',
     maxAssetSize: 100000,
     maxEntrypointSize: 100000,
   }

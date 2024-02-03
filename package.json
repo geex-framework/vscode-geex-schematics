@@ -1,294 +1,291 @@
 {
-    "version": "1.0.1",
-    "name": "geex-schematics",
-    "displayName": "Geex Schematics",
-    "description": "Geex Schematics (CLI commands) from files Explorer or Command Palette.",
-    "keywords": [
-        "angular",
-        "angular cli",
-        "schematics",
-        "Geex Angular Schematics",
-        "multi-root ready"
-    ],
-    "categories": [
-        "Other"
-    ],
-    "icon": "logo1.png",
-    "license": "MIT",
-    "publisher": "lulus",
-    "author": {
-        "name": "lulus",
-        "url": "https://www.lulus.com/en/web/"
-    },
-    "contributors": [
-        {
-            "name": "lulus",
-            "url": "https://www.lulus.com/en/web/"
-        }
-    ],
-    "homepage": "https://github.com/geex-graphql/vscode-geex-schematics/",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/geex-graphql/vscode-geex-schematics/"
-    },
-    "bugs": {
-        "url": "https://github.com/geex-graphql/vscode-geex-schematics/issues"
-    },
-    "qna": false,
-    "engines": {
-        "vscode": "^1.56.0"
-    },
-    "activationEvents": [
-        "workspaceContains:**/angular.json",
-        "workspaceContains:**/.angular.json"
-    ],
-    "main": "./dist/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "ngschematics.generateComponent",
-                "title": "Angular: Generate a component",
-                "enablement": "inAngularProject && !schematicspro"
-            },
-            {
-                "command": "ngschematics.generateService",
-                "title": "Angular: Generate a service",
-                "enablement": "inAngularProject && !schematicspro"
-            },
-            {
-                "command": "ngschematics.generateModule",
-                "title": "Angular: Generate a module",
-                "enablement": "inAngularProject && !schematicspro"
-            },
-            {
-                "command": "ngschematics.generate",
-                "title": "Angular: Generate another schematic",
-                "enablement": "inAngularProject && !schematicspronocompatibility"
-            },
-            {
-                "command": "ngschematics.documentation",
-                "title": "Geex Angular Schematics: Documentation and tutorial",
-                "enablement": "!schematicspro"
-            },
-            {
-                "command": "ngschematics.showtree",
-                "title": "Geex Angular Schematics: Show schematics list (internal command)",
-                "enablement": "!schematicspro"
-            }
-        ],
-        "menus": {
-            "explorer/context": [
-                {
-                    "command": "ngschematics.generateComponent",
-                    "group": "angularschematics@1",
-                    "when": "inAngularProject && !schematicspro"
-                },
-                {
-                    "command": "ngschematics.generateService",
-                    "group": "angularschematics@2",
-                    "when": "inAngularProject && !schematicspro"
-                },
-                {
-                    "command": "ngschematics.generateModule",
-                    "group": "angularschematics@3",
-                    "when": "inAngularProject && !schematicspro"
-                },
-                {
-                    "command": "ngschematics.generate",
-                    "group": "angularschematics@4",
-                    "when": "inAngularProject && !schematicspronocompatibility"
-                }
-            ]
-        },
-        "configuration": [
-            {
-                "title": "Geex Angular Schematics",
-                "properties": {
-                    "ngschematics.schematics": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "default": [],
-                        "description": "Add other schematics (for example: \"@angular/material\")",
-                        "scope": "resource"
-                    },
-                    "ngschematics.componentTypes": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "label": {
-                                    "type": "string",
-                                    "description": "Required component type's name, must be unique."
-                                },
-                                "options": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "minItems": 2,
-                                        "maxItems": 2
-                                    },
-                                    "description": "Required list of custom options for this component type, eg. \"[[\"changeDetection\", \"OnPush\"], [\"export\", \"true\"]]\""
-                                },
-                                "detail": {
-                                    "type": "string",
-                                    "description": "Optional human description of this component type"
-                                }
-                            },
-                            "required": [
-                                "label",
-                                "options"
-                            ]
-                        },
-                        "default": [],
-                        "description": "Add custom component types",
-                        "scope": "resource"
-                    }
-                }
-            }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "angular",
-                    "title": "Angular",
-                    "icon": "angular.svg"
-                }
-            ]
-        },
-        "views": {
-            "angular": [
-                {
-                    "id": "geex-schematics",
-                    "name": "Schematics",
-                    "when": "inAngularProject && !schematicspro"
-                }
-            ]
-        },
-        "viewsWelcome": [
-            {
-                "view": "geex-schematics",
-                "contents": "Thanks for using Geex Angular Schematics.\nThis open source extension, used by 600 000 developers, is the result of months of unpaid work. Wanna help the author AND get more features?\nSchematics Pro is an improved version of this extension with:\n- more Angular features\n- support for React, Vue and more\n- easy and fast custom schematics creation\n- architecture automation\n[Learn about Schematics Pro](https://www.schematicspro.dev/)\n[Not now, show schematics list](command:ngschematics.showtree)"
-            }
-        ],
-        "walkthroughs": [
-            {
-                "id": "angularschematics",
-                "title": "Geex Angular Schematics documentation",
-                "description": "Learn how to use Geex Angular Schematics.",
-                "steps": [
-                    {
-                        "id": "documentation",
-                        "title": "Documentation",
-                        "description": "Know how to find the documentation.",
-                        "media": {
-                            "markdown": "walkthroughs/documentation.md"
-                        }
-                    },
-                    {
-                        "id": "openfolder",
-                        "title": "Open Angular folder",
-                        "description": "Open an Angular project.\n[Open folder](command:vscode.openFolder)",
-                        "media": {
-                            "markdown": "walkthroughs/open-folder.md"
-                        },
-                        "completionEvents": [
-                            "onCommand:vscode.openFolder",
-                            "onContext:inAngularProject"
-                        ]
-                    },
-                    {
-                        "id": "scmclean",
-                        "title": "Check Git status",
-                        "description": "Be sure the Git status is clean.\n[Go to SCM view](command:workbench.view.scm)",
-                        "media": {
-                            "markdown": "walkthroughs/scm-clean.md"
-                        },
-                        "completionEvents": [
-                            "onCommand:workbench.view.scm"
-                        ]
-                    },
-                    {
-                        "id": "firstgeneration",
-                        "title": "First generation",
-                        "description": "Right-click on a folder and generate an Angular service.\n[Go to Explorer view](command:workbench.view.explorer)",
-                        "media": {
-                            "markdown": "walkthroughs/first-generation.md"
-                        },
-                        "completionEvents": [
-                            "onCommand:ngschematics.generateService"
-                        ]
-                    },
-                    {
-                        "id": "troubleshooting",
-                        "title": "Troubleshooting",
-                        "description": "A list of common configuration issues.",
-                        "media": {
-                            "markdown": "walkthroughs/troubleshooting.md"
-                        }
-                    },
-                    {
-                        "id": "generatecomponent",
-                        "title": "Generate a component",
-                        "description": "Right-click on a folder and generate a component.\n[Go to Explorer view](command:workbench.view.explorer)",
-                        "media": {
-                            "markdown": "walkthroughs/generate-component.md"
-                        },
-                        "completionEvents": [
-                            "onCommand:ngschematics.generateComponent"
-                        ]
-                    },
-                    {
-                        "id": "advanced",
-                        "title": "Advanced options",
-                        "description": "Learn about more advanced stuff.",
-                        "media": {
-                            "markdown": "walkthroughs/advanced.md"
-                        }
-                    }
-                ]
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
-        "compile": "webpack --no-performance",
-        "watch": "webpack --watch --no-performance",
-        "test": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js",
-        "ci:stable": "npm run test",
-        "ci:insiders": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js --version insiders",
-        "ci:minimal": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js --version 1.56.0",
-        "lint": "eslint src --ext ts",
-        "release:patch": "npm run vscode:prepublish && vsce publish patch && git push && npm run openvsix",
-        "release:minor": "npm run vscode:prepublish && vsce publish minor && git push && npm run openvsix",
-        "release:major": "npm run vscode:prepublish && vsce publish major && git push && npm run openvsix",
-        "publish": "vsce publish -p lulus"
-    },
-    "devDependencies": {
-        "@types/glob": "7.2.0",
-        "@types/minimist": "1.2.2",
-        "@types/mocha": "9.1.0",
-        "@types/node": "14.14.45",
-        "@types/vscode": "1.56.0",
-        "@typescript-eslint/eslint-plugin": "5.18.0",
-        "@typescript-eslint/parser": "5.18.0",
-        "eslint": "8.13.0",
-        "glob": "8.0.1",
-        "minimist": "1.2.6",
-        "mocha": "9.2.2",
-        "ts-loader": "9.2.8",
-        "typescript": "4.6.3",
-        "vsce": "2.7.0",
-        "vscode-test": "1.6.1",
-        "webpack": "5.72.0",
-        "webpack-cli": "4.9.2"
-    },
-    "dependencies": {
-        "jsonc-parser": "3.0.0",
-        "vscode-uri": "3.0.3"
+  "version": "1.0.3",
+  "name": "geex-schematics",
+  "displayName": "Geex Schematics",
+  "description": "Geex Schematics (CLI commands) from files Explorer or Command Palette.",
+  "keywords": [
+    "angular",
+    "angular cli",
+    "schematics",
+    "Geex Angular Schematics",
+    "multi-root ready"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "icon": "logo1.png",
+  "license": "MIT",
+  "publisher": "lulus",
+  "author": {
+    "name": "lulus",
+    "url": "https://www.lulus.com/en/web/"
+  },
+  "contributors": [
+    {
+      "name": "lulus",
+      "url": "https://www.lulus.com/en/web/"
     }
+  ],
+  "homepage": "https://github.com/geex-graphql/vscode-geex-schematics/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geex-graphql/vscode-geex-schematics/"
+  },
+  "bugs": {
+    "url": "https://github.com/geex-graphql/vscode-geex-schematics/issues"
+  },
+  "qna": false,
+  "engines": {
+    "vscode": "^1.56.0"
+  },
+  "activationEvents": [
+    "workspaceContains:**/angular.json",
+    "workspaceContains:**/.angular.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "geex_schematics.generateComponent",
+        "title": "Geex: Generate a component",
+        "enablement": "inAngularProject && !schematicspro"
+      },
+      {
+        "command": "geex_schematics.generateService",
+        "title": "Geex: Generate a service",
+        "enablement": "inAngularProject && !schematicspro"
+      },
+      {
+        "command": "geex_schematics.generateModule",
+        "title": "Geex: Generate a module",
+        "enablement": "inAngularProject && !schematicspro"
+      },
+      {
+        "command": "geex_schematics.generateFrontendSchematics",
+        "title": "Geex: Generate a frontend schematic",
+        "enablement": "inAngularProject && !schematicspronocompatibility"
+      },
+      {
+        "command": "geex_schematics.generateBackendSchematics",
+        "title": "Geex: Generate a backend schematic"
+      },
+      {
+        "command": "geex_schematics.documentation",
+        "title": "Geex Schematics: Documentation and tutorial",
+        "enablement": "!schematicspro"
+      },
+      {
+        "command": "geex_schematics.showtree",
+        "title": "Geex Schematics: Show schematics list (internal command)",
+        "enablement": "!schematicspro"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "geex_schematics.generateFrontendSchematics",
+          "group": "angularschematics@1",
+          "when": "inAngularProject && !schematicspronocompatibility"
+        },
+        {
+          "command": "geex_schematics.generateBackendSchematics",
+          "group": "angularschematics@2"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "Geex Angular Schematics",
+        "properties": {
+          "geex_schematics.schematics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [],
+            "description": "Add other schematics (for example: \"@angular/material\")",
+            "scope": "resource"
+          },
+          "geex_schematics.componentTypes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "description": "Required component type's name, must be unique."
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "description": "Required list of custom options for this component type, eg. \"[[\"changeDetection\", \"OnPush\"], [\"export\", \"true\"]]\""
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Optional human description of this component type"
+                }
+              },
+              "required": [
+                "label",
+                "options"
+              ]
+            },
+            "default": [],
+            "description": "Add custom component types",
+            "scope": "resource"
+          }
+        }
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "angular",
+          "title": "Angular",
+          "icon": "angular.svg"
+        }
+      ]
+    },
+    "views": {
+      "angular": [
+        {
+          "id": "geex-schematics",
+          "name": "Schematics",
+          "when": "inAngularProject && !schematicspro"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "geex-schematics",
+        "contents": "Thanks for using Geex Angular Schematics.\nThis open source extension, used by 600 000 developers, is the result of months of unpaid work. Wanna help the author AND get more features?\nSchematics Pro is an improved version of this extension with:\n- more Angular features\n- support for React, Vue and more\n- easy and fast custom schematics creation\n- architecture automation\n[Learn about Schematics Pro](https://www.schematicspro.dev/)\n[Not now, show schematics list](command:geex_schematics.showtree)"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "angularschematics",
+        "title": "Geex Angular Schematics documentation",
+        "description": "Learn how to use Geex Angular Schematics.",
+        "steps": [
+          {
+            "id": "documentation",
+            "title": "Documentation",
+            "description": "Know how to find the documentation.",
+            "media": {
+              "markdown": "walkthroughs/documentation.md"
+            }
+          },
+          {
+            "id": "openfolder",
+            "title": "Open Angular folder",
+            "description": "Open an Angular project.\n[Open folder](command:vscode.openFolder)",
+            "media": {
+              "markdown": "walkthroughs/open-folder.md"
+            },
+            "completionEvents": [
+              "onCommand:vscode.openFolder",
+              "onContext:inAngularProject"
+            ]
+          },
+          {
+            "id": "scmclean",
+            "title": "Check Git status",
+            "description": "Be sure the Git status is clean.\n[Go to SCM view](command:workbench.view.scm)",
+            "media": {
+              "markdown": "walkthroughs/scm-clean.md"
+            },
+            "completionEvents": [
+              "onCommand:workbench.view.scm"
+            ]
+          },
+          {
+            "id": "firstgeneration",
+            "title": "First generation",
+            "description": "Right-click on a folder and generate an Angular service.\n[Go to Explorer view](command:workbench.view.explorer)",
+            "media": {
+              "markdown": "walkthroughs/first-generation.md"
+            },
+            "completionEvents": [
+              "onCommand:geex_schematics.generateService"
+            ]
+          },
+          {
+            "id": "troubleshooting",
+            "title": "Troubleshooting",
+            "description": "A list of common configuration issues.",
+            "media": {
+              "markdown": "walkthroughs/troubleshooting.md"
+            }
+          },
+          {
+            "id": "generatecomponent",
+            "title": "Generate a component",
+            "description": "Right-click on a folder and generate a component.\n[Go to Explorer view](command:workbench.view.explorer)",
+            "media": {
+              "markdown": "walkthroughs/generate-component.md"
+            },
+            "completionEvents": [
+              "onCommand:geex_schematics.generateComponent"
+            ]
+          },
+          {
+            "id": "advanced",
+            "title": "Advanced options",
+            "description": "Learn about more advanced stuff.",
+            "media": {
+              "markdown": "walkthroughs/advanced.md"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
+    "compile": "webpack --no-performance",
+    "watch": "webpack --watch --no-performance",
+    "test": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js",
+    "ci:stable": "npm run test",
+    "ci:insiders": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js --version insiders",
+    "ci:minimal": "tsc -p ./ --exactOptionalPropertyTypes false && node ./out/test/runTest.js --version 1.56.0",
+    "lint": "eslint src --ext ts",
+    "release:patch": "npm run vscode:prepublish && vsce publish patch && git push && npm run openvsix",
+    "release:minor": "npm run vscode:prepublish && vsce publish minor && git push && npm run openvsix",
+    "release:major": "npm run vscode:prepublish && vsce publish major && git push && npm run openvsix",
+    "publish": "vsce publish -p lulus",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/glob": "7.2.0",
+    "@types/minimist": "1.2.2",
+    "@types/mocha": "9.1.0",
+    "@types/node": "14.14.45",
+    "@types/vscode": "1.56.0",
+    "@types/yauzl": "^2.10.3",
+    "@typescript-eslint/eslint-plugin": "5.18.0",
+    "@typescript-eslint/parser": "5.18.0",
+    "eslint": "8.13.0",
+    "glob": "8.0.1",
+    "minimist": "1.2.6",
+    "mocha": "9.2.2",
+    "ts-loader": "9.2.8",
+    "typescript": "4.6.3",
+    "vsce": "2.7.0",
+    "vscode-test": "1.6.1",
+    "webpack": "5.72.0",
+    "webpack-cli": "4.9.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "jsonc-parser": "3.0.0",
+    "jszip": "^3.10.1",
+    "vscode-uri": "3.0.3"
+  }
 }

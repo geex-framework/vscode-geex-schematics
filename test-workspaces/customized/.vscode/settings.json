@@ -1,5 +1,5 @@
 {
-  "ngschematics.componentTypes": [{
+  "geex_schematics.componentTypes": [{
     "label": "Custom component type",
     "options": [["skipSelector", "true"], ["prefix", "custom"]]
   }]
