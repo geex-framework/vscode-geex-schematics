@@ -43,7 +43,7 @@ export class WorkspaceFolderConfig implements vscode.WorkspaceFolder {
     /* Cancel previous file watchers */
     this.disposeWatchers();
 
-    const geexPattern = new vscode.RelativePattern(this, "**/geex.code-workspace");
+    const geexPattern = new vscode.RelativePattern(this, "**/*.code-workspace");
     // todo: find better way to identify the geex folder
     let geexPatternMatches = await vscode.workspace.findFiles(geexPattern, '**/node_modules/**', 1);
     if (geexPatternMatches.length) {

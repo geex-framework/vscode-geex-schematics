@@ -129,10 +129,15 @@ export class BackendUserJourney {
     let newFileUri: vscode.Uri;
     if (template == "module") {
       newFileUri = (await this.generateModule(contextUri));
+      if (newFileUri != undefined) {
+        this.updateProjectDependencies(newFileUri);
+      }
     }
     if (template == "solution") {
       newFileUri = (await this.generateSolution(contextUri));
     }
+
+
     try {
 
       /* Show progress to the user */
@@ -148,6 +153,16 @@ export class BackendUserJourney {
       this.showUnknownStatus().catch(() => { });
     }
 
+  }
+  updateProjectDependencies(newFileUri: vscode.Uri) {
+    const serverFolder = vscode.Uri.joinPath(newFileUri, "../../")
+    const segments = newFileUri.path.split("/");
+    const projectName = segments[segments.length - 1];
+    const terminal = vscode.window.createTerminal({
+      name: "geex schematics",
+      cwd: serverFolder,
+    });
+    terminal.sendText(`dotnet sln add -s ./modules ./modules/${projectName}/${projectName}.Core/${projectName}.Core.csproj`);
   }
   private async generateModule(contextUri: vscode.Uri | undefined) {
     const body = {

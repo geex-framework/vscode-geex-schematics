@@ -701,20 +701,20 @@ export class UserJourney {
     private async showCollectionMissingErrorWithFix(collectionName: string): Promise<void> {
 
         const message = (collectionName === angularCollectionName) ?
-            `"${collectionName}" should be present in a correctly installed Angular project.` :
+            `"${collectionName}" should be present in a correctly installed Angular project, is node_modules folder ready for your project?` :
             `Cannot load "${collectionName}" collection. It may not exist in "${this.workspaceFolder.name}" workspace folder.`;
 
         Output.logError(message);
 
-        const fixLabel = `Try to npm install the missing schematics`;
+        const fixLabel = `Try to install dependencies.`;
 
         const fixAction = await vscode.window.showErrorMessage(message, fixLabel);
 
         if (fixAction === fixLabel) {
 
-            Output.logInfo(`Trying to npm install ${collectionName}`);
+            Output.logInfo(`Trying to install dependencies.`);
 
-            Terminals.send(this.workspaceFolder, `npm install ${collectionName} --save-dev`);
+            Terminals.send(this.workspaceFolder, `npm ci`);
 
             const reloadLabel = `Reload window`;
 
