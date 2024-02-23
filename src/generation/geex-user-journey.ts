@@ -303,7 +303,7 @@ export class GeexUserJourney {
                   generateTemplate(
                     template: client,
                     args: {
-                      clientTemplate: {
+                      clientUiTemplate: {
                         org: "${this.orgName}"
                         clientUiType: ${clientUiType}
                       }
