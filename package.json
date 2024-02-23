@@ -1,5 +1,5 @@
 {
-  "version": "1.0.7",
+  "version": "1.0.8",
   "name": "geex-schematics",
   "displayName": "Geex Schematics",
   "description": "Geex Schematics (CLI commands) from files Explorer or Command Palette.",
@@ -66,8 +66,8 @@
         "enablement": "inAngularProject && !schematicspronocompatibility"
       },
       {
-        "command": "geex_schematics.generateBackendSchematics",
-        "title": "Geex: Generate a backend schematic"
+        "command": "geex_schematics.generateGeexSchematics",
+        "title": "Geex: Generate a geex schematic"
       },
       {
         "command": "geex_schematics.documentation",
@@ -88,7 +88,7 @@
           "when": "inAngularProject && !schematicspronocompatibility"
         },
         {
-          "command": "geex_schematics.generateBackendSchematics",
+          "command": "geex_schematics.generateGeexSchematics",
           "group": "angularschematics@2"
         }
       ]

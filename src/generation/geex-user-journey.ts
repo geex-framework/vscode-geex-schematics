@@ -7,7 +7,7 @@ import JSZip = require("jszip");
 import { CliCommand } from './cli-command';
 import path = require('path');
 
-export class BackendUserJourney {
+export class GeexUserJourney {
   extensionContext!: vscode.ExtensionContext;
   workspaceFolder!: WorkspaceFolderConfig;
   cliCommand!: CliCommand;
@@ -62,90 +62,86 @@ export class BackendUserJourney {
     /* If the project has not been already resolved via context path (in `CliCommand` constructor)
      * and if the Angular projects have been correctly resolved from config */
 
-    let template = "";
+    let template = (await vscode.window.showQuickPick(["module", "solution", "client"], { placeHolder: "what schematics are you going to generate?" }))!;
 
-    if (this.workspaceFolder?.geexConfig?.orgName) {
-      template = "module";
-    }
-    else {
-      template = (await vscode.window.showQuickPick(["module", "solution"], { placeHolder: "what schematics are you going to generate?" }))!;
+    if (template == "solution") {
+      await vscode.window.showInformationMessage("geex solution will follow convention of '<org>' as project name with a default module named '<org>.<module>' and a default <aggregate> entity.", { modal: true }, "OK");
     }
 
     if (template == "module") {
       vscode.window.showInformationMessage("geex module will follow convention of '<org>.<module>' as module name with a default <aggregate> entity.", "OK");
     }
-    if (template == "solution") {
-      await vscode.window.showInformationMessage("geex solution will follow convention of '<org>' as project name with a default module named '<org>.<module>' and a default <aggregate> entity.", { modal: true }, "OK");
+
+    if (template == "client") {
     }
-
-    let orgName = this.workspaceFolder?.geexConfig?.orgName;
-
-    orgName = (await vscode.window.showInputBox({
-      placeHolder: `Please confirm the organization name.`,
-      ignoreFocusOut: true,
-      value: orgName,
-    }))!;
-
-    if (!orgName) {
-      Output.logInfo(`You have canceled the org confirmation.`);
-      return;
-    }
-
-    this.orgName = orgName;
-    if (this.orgName) {
-      Output.logInfo(`org used: "${this.orgName}"`);
-    }
-
-    let modName = (await vscode.window.showInputBox({
-      placeHolder: `Please confirm the module name.`,
-      ignoreFocusOut: true,
-    }))!;
-
-    if (!modName) {
-      Output.logInfo(`You have canceled the module confirmation.`);
-      return;
-    }
-
-    this.modName = modName;
-    if (this.modName) {
-      Output.logInfo(`mod used: "${this.modName}"`);
-    }
-
-    let aggregateName = (await vscode.window.showInputBox({
-      placeHolder: `Please confirm the aggregate name.`,
-      ignoreFocusOut: true,
-    }))!;
-
-    if (!aggregateName) {
-      Output.logInfo(`You have canceled the aggregate confirmation.`);
-      return;
-    }
-
-    this.aggregateName = aggregateName;
-    if (this.aggregateName) {
-      Output.logInfo(`aggregate used: "${this.aggregateName}"`);
-    }
-
-    let newFileUri: vscode.Uri;
-    if (template == "module") {
-      newFileUri = (await this.generateModule(contextUri));
-      if (newFileUri != undefined) {
-        this.updateProjectDependencies(newFileUri);
-      }
-    }
-    if (template == "solution") {
-      newFileUri = (await this.generateSolution(contextUri));
-    }
-
 
     try {
-
-      /* Show progress to the user */
-      await vscode.window.withProgress({
-        location: vscode.ProgressLocation.Notification,
-        title: `${extensionName}: launching the generation, please wait...`,
-      }, () => newFileUri && this.jumpToFile(newFileUri));
-
+      let newFileUri: vscode.Uri;
+      if (template == "module") {
+        await this.inputOrg();
+        await this.inputMod();
+        await this.inputAggregate();
+        await vscode.window.withProgress({
+          location: vscode.ProgressLocation.Notification,
+          title: `${extensionName}: launching the generation, please wait...`,
+        }, async () => {
+          newFileUri = (await this.generateModule(contextUri));
+          if (newFileUri != undefined) {
+            this.updateProjectDependencies(newFileUri);
+          }
+          newFileUri && this.jumpToFile(newFileUri)
+        });
+      }
+      if (template == "solution") {
+        await this.inputOrg();
+        await this.inputMod();
+        await this.inputAggregate();
+        await vscode.window.withProgress({
+          location: vscode.ProgressLocation.Notification,
+          title: `${extensionName}: launching the generation, please wait...`,
+        }, async () => {
+          newFileUri = (await this.generateSolution(contextUri));
+          newFileUri && this.jumpToFile(newFileUri)
+        });
+      }
+      if (template == "client") {
+        await this.inputOrg();
+        let clientUiType = (await vscode.window.showQuickPick([{
+          label: "landing",
+          description: "landing page ui, commonly used as official website"
+        }, {
+          label: "admin",
+          description: "admin ui, commonly used as system management console"
+        }, {
+          label: "docs",
+          description: "docs ui, commonly used as product documentation"
+        }, {
+          label: "community",
+          description: "community ui, commonly used as community forum"
+        }, {
+          label: "im",
+          description: "im ui, commonly used as instant messaging system"
+        }, {
+          label: "mall",
+          description: "mall ui, commonly used as e-commerce platform"
+        }, {
+          label: "account",
+          description: "account ui, commonly used as user center"
+        }, {
+          label: "event",
+          description: "event ui, commonly used for temporary event pages"
+        }], {
+          placeHolder: `Please confirm the client template type.`,
+          ignoreFocusOut: true,
+        }))!;
+        await vscode.window.withProgress({
+          location: vscode.ProgressLocation.Notification,
+          title: `${extensionName}: launching the generation, please wait...`,
+        }, async () => {
+          newFileUri = (await this.generateClient(contextUri, clientUiType.label));
+          newFileUri && this.jumpToFile(newFileUri)
+        });
+      }
     } catch {
 
       /* Auto-opening the file was not possible, warn the user the command is launched
@@ -154,6 +150,45 @@ export class BackendUserJourney {
     }
 
   }
+  private async inputAggregate() {
+    let aggregateName = (await vscode.window.showInputBox({
+      placeHolder: `Please confirm the aggregate name.`,
+      ignoreFocusOut: true,
+    }))!;
+
+    if (aggregateName) {
+      this.aggregateName = aggregateName;
+      Output.logInfo(`aggregate used: "${this.aggregateName}"`);
+    }
+  }
+
+  private async inputMod() {
+    let modName = (await vscode.window.showInputBox({
+      placeHolder: `Please confirm the module name.`,
+      ignoreFocusOut: true,
+    }))!;
+
+    if (modName) {
+      this.modName = modName;
+      Output.logInfo(`mod used: "${this.modName}"`);
+    }
+  }
+
+  private async inputOrg() {
+    let orgName = this.workspaceFolder?.geexConfig?.orgName;
+
+    orgName = (await vscode.window.showInputBox({
+      placeHolder: `Please confirm the organization name.`,
+      ignoreFocusOut: true,
+      value: orgName,
+    }))!;
+
+    if (orgName) {
+      this.orgName = orgName;
+      Output.logInfo(`org used: "${this.orgName}"`);
+    }
+  }
+
   updateProjectDependencies(newFileUri: vscode.Uri) {
     const serverFolder = vscode.Uri.joinPath(newFileUri, "../../")
     const segments = newFileUri.path.split("/");
@@ -162,7 +197,7 @@ export class BackendUserJourney {
       name: "geex schematics",
       cwd: serverFolder,
     });
-    terminal.sendText(`dotnet sln add -s ./modules ./modules/${projectName}/${projectName}.Core/${projectName}.Core.csproj`);
+    terminal.sendText(`dotnet sln add ./modules/${projectName}/${projectName}.Core/${projectName}.Core.csproj -s ./modules`);
   }
   private async generateModule(contextUri: vscode.Uri | undefined) {
     const body = {
@@ -224,6 +259,53 @@ export class BackendUserJourney {
                         org: "${this.orgName}"
                         moduleName: "${this.modName}"
                         aggregateName: "${this.aggregateName}"
+                      }
+                    }
+                  ) {
+                    url
+                  }
+                }`
+    };
+
+    let generate = await axios({
+      method: 'post',
+      url: 'https://api.dev.geex.tech/graphql/',
+      headers: {
+        'content-type': 'application/json'
+      },
+      data: body
+    }).catch((error) => {
+      Output.showError(`Error generate template: ${error}`);
+    }) as AxiosResponse;
+
+    let newFileUri = (await axios({
+      method: 'get',
+      url: generate.data.data.generateTemplate.url,
+      responseType: "arraybuffer",
+      headers: {
+        'content-type': 'application/json',
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Encoding": "gzip, deflate, br"
+      },
+    })
+      .then(async (response) => {
+        const buffer = Buffer.from(response.data, 'binary');
+        return this.unzipFromBuffer(buffer, contextUri!);
+      }).catch((error) => {
+        Output.showError(`Error generate template: ${error}`);
+      })) as vscode.Uri;
+    return newFileUri;
+  }
+
+  private async generateClient(contextUri: vscode.Uri | undefined, clientUiType: string) {
+    const body = {
+      query: `mutation generateClient {
+                  generateTemplate(
+                    template: client,
+                    args: {
+                      clientTemplate: {
+                        org: "${this.orgName}"
+                        clientUiType: ${clientUiType}
                       }
                     }
                   ) {

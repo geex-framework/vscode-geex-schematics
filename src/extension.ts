@@ -5,7 +5,7 @@ import { isSchematicsProActive, Output, Terminals } from './utils';
 import { Workspace } from './workspace';
 import { UserJourney } from './generation';
 import { SchematicsTreeDataProvider, SchematicsTreeDataProviderEmpty } from './view';
-import { BackendUserJourney } from './generation/backend-user-journey';
+import { GeexUserJourney } from './generation/geex-user-journey';
 
 let treeDataProvider: vscode.TreeView<vscode.TreeItem> | undefined;
 
@@ -98,14 +98,14 @@ export function activate(context: vscode.ExtensionContext): void {
       (new UserJourney()).start(context, contextUri, angularCollectionName, 'module').catch(() => { });
 
     }),
-    vscode.commands.registerCommand('geex_schematics.generateBackendSchematics', (contextUri?: vscode.Uri) => {
+    vscode.commands.registerCommand('geex_schematics.generateGeexSchematics', (contextUri?: vscode.Uri) => {
 
-      Output.logInfo(`Starting journey to generate a backend module.`);
+      Output.logInfo(`Starting journey to generate a geex module.`);
 
       /* For shortcuts, always use default official collection
       * (default user collection can be set to something else,
       * and this can be an issue when they are buggy like the Ionic ones) */
-      (new BackendUserJourney()).start(context, contextUri).catch(() => { });
+      (new GeexUserJourney()).start(context, contextUri).catch(() => { });
 
     }),
     vscode.commands.registerCommand('geex_schematics.generateFrontendSchematics', (contextUri?: vscode.Uri, options?: { collectionName?: string, schematicName?: string }) => {
