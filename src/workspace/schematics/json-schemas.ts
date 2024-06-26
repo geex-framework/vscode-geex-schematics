@@ -9,14 +9,12 @@ export interface CollectionSchematicJsonSchema {
     /** Some schematics extend another one */
     extends?: string;
 }
-
 export interface CollectionJsonSchema {
     /** A collection can extend other ones */
     extends: string[];
     /** Key is the schematic's name */
     schematics: Map<string, CollectionSchematicJsonSchema>;
 }
-
 export interface SchematicOptionJsonSchema {
     type: 'string' | 'boolean' | 'array';
     description?: string;
@@ -42,11 +40,9 @@ export interface SchematicOptionJsonSchema {
     /** Some options can have a prompt for Angular CLI interactive mode */
     'x-prompt'?: string;
 }
-
 export interface SchematicJsonSchema {
     /** Key is the option's name */
     properties: Map<string, SchematicOptionJsonSchema>;
     /** Some options may be required */
     required?: string[] | undefined;
 }
-

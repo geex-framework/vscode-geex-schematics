@@ -16,7 +16,6 @@ export const schematicCollectionsNames: string[] = [
     'ngx-spec',
     './schematics/collection.json'
 ];
-
 export interface ComponentType {
     /** Required component type's name, must be unique */
     label: string;
@@ -27,7 +26,6 @@ export interface ComponentType {
     /** Optional human description of this component type */
     detail?: string | undefined;
 }
-
 /**
  * Default custom component types.
  * Each type will only be enabled if its `package` is installed.
@@ -89,12 +87,9 @@ export const defaultComponentTypes: ComponentType[] = [
         detail: `PrimeNG dynamic dialog`,
     },
 ];
-
 export const angularCollectionName = '@schematics/angular';
-
 export const angularConfigFileNames: string[] = [
     'angular.json',
     '.angular.json',
 ];
-
 export const extensionName = 'Geex Angular Schematics';

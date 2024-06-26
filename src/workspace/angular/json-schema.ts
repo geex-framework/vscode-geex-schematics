@@ -1,13 +1,10 @@
 export type AngularProjectType = 'application' | 'library';
-
 export interface AngularJsonSchematicsOptionsSchema {
     /** Tells if the file be generated in a subfolder (not flat) or not (flat) */
     flat?: boolean | undefined;
 }
-
 /** Key will be the full schematics name (eg.: "@schematics/angular") */
 export type AngularJsonSchematicsSchema = Map<string, AngularJsonSchematicsOptionsSchema>;
-
 export interface AngularJsonProjectSchema {
     /** Required project type, Angular projects are `application` by default, but can be `library` too. */
     projectType: AngularProjectType;
@@ -18,7 +15,6 @@ export interface AngularJsonProjectSchema {
     /** Default values for schematics options */
     schematics?: AngularJsonSchematicsSchema;
 }
-
 /** Description of `angular.json` */
 export interface AngularJsonSchema {
     /** Currently can only be `1` */
@@ -39,7 +35,6 @@ export interface AngularJsonSchema {
      */
     projects: Map<string, AngularJsonProjectSchema>;
 }
-
 export interface LintJsonSchema {
     rules: {
         componentClassSuffixes?: string[] | undefined;

@@ -264,6 +264,7 @@
   },
   "devDependencies": {
     "@types/glob": "7.2.0",
+    "@types/js-yaml": "^4.0.9",
     "@types/minimist": "1.2.2",
     "@types/mocha": "9.1.0",
     "@types/node": "14.14.45",
@@ -284,6 +285,7 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
+    "js-yaml": "^4.1.0",
     "jsonc-parser": "3.0.0",
     "jszip": "^3.10.1",
     "vscode-uri": "3.0.3"

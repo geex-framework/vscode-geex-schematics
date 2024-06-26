@@ -1,18 +1,14 @@
 import * as vscode from 'vscode';
-
 export interface ShortcutType {
     options: Map<string, string | string[]>;
     choice: vscode.QuickPickItem;
 }
-
 export type ShortcutsTypes = Map<string, ShortcutType>;
-
 export enum SHORTCUTS_CONFIRMATION_LABEL {
     YES          = `$(check) Confirm`,
     MORE_OPTIONS = `$(gear) Add more options`,
     NO           = `$(close) Cancel`,
 }
-
 /* Cache for shortcut confirmation choices */
 export const shortcutsConfirmationChoices: vscode.QuickPickItem[] = [{
     label: SHORTCUTS_CONFIRMATION_LABEL.YES,
